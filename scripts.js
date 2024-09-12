@@ -1,13 +1,17 @@
 const button = document.getElementById("convert-button"); //mapeando nutton
 const select = document.getElementById("currency-select"); //mapeando select
 
-const dolar = 5.2;
-const euro = 5.9;
-
-const convertValues = () => {
+const convertValues = async () => {
   const inputReais = document.getElementById("input-real").value; //input-real capta todo valor do input .value limata a mostrar apenas o valor
   const realValueText = document.getElementById("real-value-text"); //mapear capitura valor inicial
   const currencyValueText = document.getElementById("currency-value-text"); //captura valor inicial
+
+  const data = await fetch(
+    " https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL"
+  ).then((response) => response.json());
+
+  const dolar = data.USDBRL.high;
+  const euro = data.EURBRL.high;
 
   //realValueText.innerHTML = inputReais; //altera o valor inicial do html sem fornatar valor
 
